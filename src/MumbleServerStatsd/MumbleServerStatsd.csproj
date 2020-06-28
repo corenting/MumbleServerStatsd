@@ -3,10 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\StyleCopeRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="EndianBitConverter" Version="1.1.0" />
+    <PackageReference Include="JustEat.StatsD" Version="4.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
