@@ -1,6 +1,6 @@
 # MumbleServerStatsd
 
-![Build](https://github.com/corenting/MumbleServerStatsd/workflows/Build/badge.svg) ![Latest Release](https://img.shields.io/github/v/release/corenting/MumbleServerStatsd)
+![Build](https://github.com/corenting/MumbleServerStatsd/workflows/Build/badge.svg) ![Latest Release](https://img.shields.io/github/v/release/corenting/MumbleServerStatsd) ![License](https://img.shields.io/github/license/corenting/MumbleServerStatsd)
 
 Send the number of connected users of a mumble server as a statsd gauge.
 
@@ -16,3 +16,13 @@ Options:
   --version                              Show version information
   -?, -h, --help                         Show help and usage information
 ```
+
+## Download
+
+Available in [Github releases](https://github.com/corenting/MumbleServerStatsd/releases/latest) for the following platforms :
+- Linux x64
+- Linux x64 (musl)
+- Linux arm64
+- Linux arm
+- Windows x64
+- Windows arm64
