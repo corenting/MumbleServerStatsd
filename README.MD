@@ -1,5 +1,7 @@
 # MumbleServerStatsd
 
+![Build](https://github.com/corenting/MumbleServerStatsd/workflows/Build/badge.svg)
+
 Send the number of connected users of a mumble server as a statsd gauge.
 
 ```
