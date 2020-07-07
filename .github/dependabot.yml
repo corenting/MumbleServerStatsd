@@ -1,7 +1,7 @@
 version: 2
 updates:
 - package-ecosystem: "nuget"
-  directory: "MumbleServerStatsd/src/MumbleServerStatsd/MumbleServerStatsd.csproj"
+  directory: "src/MumbleServerStatsd/MumbleServerStatsd.csproj"
   schedule:
     interval: daily
   open-pull-requests-limit: 10
