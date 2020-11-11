@@ -1,6 +1,8 @@
 ﻿namespace MumbleServerStatsd
 {
     using System;
+    using CommandLine;
+    using CommandLine.Text;
     using MumbleServerStatsd.Ping;
 
     /// <summary>
@@ -8,23 +10,40 @@
     /// </summary>
     public class Program
     {
-        /// <summary>
-        /// statsd client for mumble-server.
-        /// </summary>
-        /// <param name="mumbleHostname">hostname or IP of the mumble server.</param>
-        /// <param name="statsdHostname">hostname or IP of the statsd server.</param>
-        /// <param name="statsdPort">port of the statsd server (optional, 8125 if not set).</param>
-        /// <param name="mumblePort">port of the server (optional, 64738 if not set).</param>
-        public static void Main(string mumbleHostname, string statsdHostname, int statsdPort = 8125, int mumblePort = 64738)
+        public class Options
         {
-            if (mumbleHostname == null)
-            {
-                Console.Error.WriteLine("Error: you need to specify an hostname (see --help for help).");
-                Environment.Exit(1);
-            }
+            [Option("mumble-hostname", Required = true, HelpText = "Hostname or IP of the mumble server.")]
+            public string MumbleHostname { get; set; }
 
-            PingResponse ping = PingUtils.PingServer(mumbleHostname, mumblePort);
-            Statsd.SendGauge(statsdHostname, statsdPort, ping.ConnectedUsers);
+            [Option("statsd-hostname", Required = true, HelpText = "Hostname or IP of the statsd server.")]
+            public string StatsdHostname { get; set; }
+
+            [Option("statsd-port", Default = 8125, HelpText = "Port of the statsd server (optional, 8125 if not set).")]
+            public int StatsdPort { get; set; }
+
+            [Option("mumble-port", Default = 64738, HelpText = "Port of the mumble server (optional, 64738 if not set).")]
+            public int MumblePort { get; set; }
+        }
+
+        public static void Main(string[] args)
+        {
+            var parser = new CommandLine.Parser(with => with.HelpWriter = null);
+            var parserResult = parser.ParseArguments<Options>(args);
+            var helpText = HelpText.AutoBuild(parserResult, h =>
+            {
+                h.AdditionalNewLineAfterOption = false;
+                h.Copyright = "";
+                return h;
+            }, e => e);
+
+            parserResult
+            .WithParsed<Options>(options => {
+                PingResponse ping = PingUtils.PingServer(options.MumbleHostname, options.MumblePort);
+                Statsd.SendGauge(options.StatsdHostname, options.StatsdPort, ping.ConnectedUsers);
+            })
+            .WithNotParsed(errs => {
+                Console.Error.WriteLine(helpText);
+            });
         }
     }
 }

@@ -1,6 +1,6 @@
 # MumbleServerStatsd
 
-![Build](https://github.com/corenting/MumbleServerStatsd/workflows/Build/badge.svg) ![Latest Release](https://img.shields.io/github/v/release/corenting/MumbleServerStatsd) ![License](https://img.shields.io/github/license/corenting/MumbleServerStatsd)
+![Build](https://github.com/corenting/MumbleServerStatsd/workflows/Build/badge.svg?branch=master) ![Latest Release](https://img.shields.io/github/v/release/corenting/MumbleServerStatsd) ![License](https://img.shields.io/github/license/corenting/MumbleServerStatsd)
 
 Send the number of connected users of a mumble server as a statsd gauge.
 
