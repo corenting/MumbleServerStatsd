@@ -8,34 +8,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        runtime-identifier: [ "win-x64", "win-arm64", "linux-x64", "linux-musl-x64", "linux-arm64", "linux-arm"]
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
-    - name: Build (win-x64)
+        dotnet-version: 5.0.x
+    - name: Build app
       run: make release
       env:
-        RUNTIME_IDENTIFIER: win-x64
-    - name: Build (win-arm64)
-      run: make release
-      env:
-        RUNTIME_IDENTIFIER: win-arm64
-    - name: Build (linux-x64)
-      run: make release
-    - name: Build (linux-musl-x64)
-      run: make release
-      env:
-        RUNTIME_IDENTIFIER: linux-musl-x64
-    - name: Build (linux-arm64)
-      run: make release
-      env:
-        RUNTIME_IDENTIFIER: linux-arm64
-    - name: Build (linux-arm)
-      run: make release
-      env:
-        RUNTIME_IDENTIFIER: linux-arm
+        RUNTIME_IDENTIFIER: ${{ matrix.runtime-identifier }}
